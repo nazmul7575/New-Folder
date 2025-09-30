@@ -17,8 +17,8 @@ document.addEventListener("DOMContentLoaded", main);
 function main() {
 	const root = document.getElementById("root");
 	const output = document.getElementById("output");
-	const changeBtn = document.getElementById("change-btn");
-	const copyBtn = document.getElementById("copy-btn");
+	const changeBtn = document.getElementById("change_btn");
+	const copyBtn = document.getElementById("copy_btn");
 
 	changeBtn.addEventListener("click", function () {
 		const bgColor = generateHexColor();
