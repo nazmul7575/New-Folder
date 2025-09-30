@@ -38,12 +38,11 @@ function main() {
 
 // step 2 - random color generator function
 function generateHexColor() {
-	// #000000 #ffffff
-	// 255, 255, 255 -> #FFFFFF
 	const red = Math.floor(Math.random() * 255);
 	const green = Math.floor(Math.random() * 255);
 	const blue = Math.floor(Math.random() * 255);
 
+	// this is not clear to me, ask mehedi
 	return `#${red.toString(16)}${green.toString(16)}${blue.toString(16)}`;
 }
 
