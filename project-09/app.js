@@ -16,13 +16,29 @@ function main() {
 		"generate_random_color"
 	);
 	const colorModeHexInp = document.getElementById("input_hex");
+	const colorSliderRed = document.getElementById("color_slider_red");
+	const colorSliderGreen = document.getElementById("color_slider_green");
+	const colorSliderBlue = document.getElementById("color_slider_blue");
 
+	// event listener
 	generateRandomColorBtn.addEventListener(
 		"click",
 		handleGenerateRandomColorBtn
 	);
 
 	colorModeHexInp.addEventListener("keyup", handleColorModeHexInp);
+	colorSliderRed.addEventListener(
+		"change",
+		handleColorSliders(colorSliderRed, colorSliderGreen, colorSliderBlue)
+	);
+	colorSliderGreen.addEventListener(
+		"change",
+		handleColorSliders(colorSliderRed, colorSliderGreen, colorSliderBlue)
+	);
+	colorSliderBlue.addEventListener(
+		"change",
+		handleColorSliders(colorSliderRed, colorSliderGreen, colorSliderBlue)
+	);
 
 	// copyBtn.addEventListener("click", function () {
 	// 	navigator.clipboard.writeText(`#${output.value}`);
@@ -66,6 +82,17 @@ function handleColorModeHexInp(e) {
 			updateColorCodeToDom(color);
 		}
 	}
+}
+
+function handleColorSliders(colorSliderRed, colorSliderGreen, colorSliderBlue) {
+	return function () {
+		const color = {
+			red: parseInt(colorSliderRed.value),
+			green: parseInt(colorSliderGreen.value),
+			blue: parseInt(colorSliderBlue.value),
+		};
+		updateColorCodeToDom(color);
+	};
 }
 
 // DOM functions
