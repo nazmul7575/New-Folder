@@ -15,16 +15,14 @@ function main() {
 	const generateRandomColorBtn = document.getElementById(
 		"generate_random_color"
 	);
-	// const root = document.getElementById("root");
-	// const output = document.getElementById("output");
-	// const changeBtn = document.getElementById("change_btn");
-	// const copyBtn = document.getElementById("copy_btn");
-	// const copyBtn2 = document.getElementById("copy_btn2");
+	const colorModeHexInp = document.getElementById("input_hex");
 
 	generateRandomColorBtn.addEventListener(
 		"click",
 		handleGenerateRandomColorBtn
 	);
+
+	colorModeHexInp.addEventListener("keyup", handleColorModeHexInp);
 
 	// copyBtn.addEventListener("click", function () {
 	// 	navigator.clipboard.writeText(`#${output.value}`);
@@ -51,23 +49,23 @@ function main() {
 	// 		alert("Invalid Color Code");
 	// 	}
 	// });
-
-	// output.addEventListener("keyup", function (e) {
-	// 	const color = e.target.value;
-	// 	if (color) {
-	// 		output.value = color.toUpperCase();
-	// 		if (color && isValidHex(color)) {
-	// 			root.style.backgroundColor = `#${color}`;
-	// 			output2.value = hexToRgb(color);
-	// 		}
-	// 	}
-	// });
 }
 
 // Events handlers
 function handleGenerateRandomColorBtn() {
 	const color = generateColorDecimal();
 	updateColorCodeToDom(color);
+}
+
+function handleColorModeHexInp(e) {
+	const hexColor = e.target.value;
+	if (hexColor) {
+		this.value = hexColor.toUpperCase();
+		if (isValidHex(hexColor)) {
+			const color = hexToDecimalColors(hexColor);
+			updateColorCodeToDom(color);
+		}
+	}
 }
 
 // DOM functions
@@ -97,9 +95,11 @@ function updateColorCodeToDom(color) {
 	const hexColor = generateHexColor(color);
 	const rgbColor = generateRGBColor(color);
 
-	document.getElementById("color_display").style.backgroundColor = hexColor;
-	document.getElementById("color_mode_hex").value = hexColor;
-	document.getElementById("color_mode_rgb").value = rgbColor;
+	document.getElementById(
+		"color_display"
+	).style.backgroundColor = `#${hexColor}`;
+	document.getElementById("input_hex").value = hexColor;
+	document.getElementById("input_rgb").value = rgbColor;
 	document.getElementById("color_slider_red").value = color.red;
 	document.getElementById("color_slider_red_label").innerText = color.red;
 	document.getElementById("color_slider_green").value = color.green;
@@ -136,7 +136,7 @@ function generateHexColor({ red, green, blue }) {
 		return hex.length === 1 ? `0${hex}` : hex;
 	};
 
-	return `#${getTwoCode(red)}${getTwoCode(green)}${getTwoCode(
+	return `${getTwoCode(red)}${getTwoCode(green)}${getTwoCode(
 		blue
 	)}`.toUpperCase();
 }
