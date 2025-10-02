@@ -9,7 +9,7 @@
 body {
 	font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 	font-size: 16px;
-	background-color: #000;
+	background-color: #222020;
 	width: 100vw;
 	height: 100vh;
 }
@@ -97,16 +97,16 @@ body {
 
 .hex-icon {
 	position: absolute;
-	top: 47%;
+	top: 41%;
 	left: 1px;
 	background-color: #ddd;
-	padding: 0.18rem 1rem;
+	padding: 0.4rem 0.5rem;
 	border-top-left-radius: 0.15rem;
 	border-bottom-left-radius: 0.15rem;
 }
 
 .hex-input {
-	padding-left: 3rem !important;
+	padding-left: 1.7rem !important;
 }
 
 .color-sliders-group {
