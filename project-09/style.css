@@ -80,7 +80,7 @@ body {
 	gap: 1rem;
 }
 
-.selected.color-code {
+.selected-color-code {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 1rem;
