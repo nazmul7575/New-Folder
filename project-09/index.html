@@ -5,36 +5,84 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/project-08/style.css">
+    <link rel="stylesheet" href="/project-09/style.css">
 </head>
 
 <body>
-    <div class="container" id="root">
-        <h1>
-            Change The Background Color By Clicking The Following Button
-        </h1>
-        <div class="label-group">
-            <label for="output">Hex Code</label>
-        </div>
-        <div class="input-group">
-            <div class="input-icon">#</div>
-            <input class="output" type="text" value="000000" id="output">
-            <button class="copy-btn" id="copy_btn" title="copy to clipboard">
-                Copy</button>
-        </div>
-        <div class="label-group">
-            <label for="output">RGB Code</label>
-        </div>
-        <div class="output-group">
-            <input class="output" type="text" value="rgb(0, 0, 0,)" id="output2" disabled>
-            <button class="copy-btn" id="copy_btn2" title="copy to clipboard">Copy</button>
-        </div>
-        <button class="change-btn" id="change_btn">Change Color</button>
+    <div class="container">
+        <!-- display section -->
+        <section class="section">
+            <div class="section-header">
+                <h3 class="sectiom-title">Display Color</h3>
+                <button class="section-header-action">Random Color</button>
+            </div>
+            <div class="dividor"></div>
+            <div class="color-display"></div>
+        </section>
+
+        <!-- Change & Copy Color -->
+        <section class="section">
+            <section class="section-header">
+                <h3 class="section-title">Change & Copy Color</h3>
+                <button class="section-header-action">Copy To Clipboard</button>
+            </section>
+            <div class="dividor"></div>
+            <div class="select-copy-mode">
+                <p class="load">Select Copy Mode</p>
+                <div class="mode-radio-group">
+                    <div class="mode-input-group">
+                        <input type="radio" name="color-mode" id="color_mode_hex">
+                        <label for="color_mode_hex">Hex</label>
+                    </div>
+                    <div class="mode-input-group">
+                        <input type="radio" name="color-mode" id="color_mode_rgb">
+                        <label for="color_mode_rgb">RGB</label>
+                    </div>
+                </div>
+            </div>
+            <div class="selected-color-code">
+                <div class="hex-input-group">
+                    <label for="input-hex" class="lead">Hex</label>
+                    <input type="text" placeholder="#dddeee" id="input_hex" class="text-input hex-input">
+                    <div class="hex-icon">#</div>
+                </div>
+                <div class="rgb-input-group">
+                    <label for="input-group" class="lead">RGB</label>
+                    <input type="text" placeholder="rgb(221, 222, 238)" id="input_rgb" class="text-input" disabled>
+                </div>
+            </div>
+            <div class="color-sliders">
+                <p class="lead">Adjust RGB Colors</p>
+                <div class="color-sliders-group">
+                    <div>
+                        <div class="slider-label-group">
+                            <p>Red</p>
+                            <p id="color_slider_red_lebel">221</p>
+                        </div>
+                        <input type="range" min="0" max="255" value="221" class="color-slider" id="color_slider_red">
+                    </div>
+                    <div>
+                        <div class="slider-label-group">
+                            <p>Green</p>
+                            <p id="color_slider_green_lebel">222</p>
+                        </div>
+                        <input type="range" min="0" max="255" value="222" class="color-slider" id="color_slider_green">
+                    </div>
+                    <div>
+                        <div class="slider-label-group">
+                            <p>Blue</p>
+                            <p id="color_slider_blue_lebel">238</p>
+                        </div>
+                        <input type="range" min="0" max="255" value="238" class="color-slider" id="color_slider_blue">
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 
 
 
-    <script src="/project-08/app.js"></script>
+    <script src="/project-09/app.js"></script>
 </body>
 
 </html>
