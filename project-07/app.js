@@ -30,7 +30,6 @@ function main() {
 		output.value = hex.substring(1);
 		output2.value = rgb;
 	});
-	console.log(navigator);
 
 	copyBtn.addEventListener("click", function () {
 		navigator.clipboard.writeText(`#${output.value}`);

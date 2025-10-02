@@ -75,6 +75,10 @@ input[type="text"],
 	border: none;
 }
 
+#output2 {
+	margin-left: -1rem;
+}
+
 #change_btn {
 	padding: 1rem 3rem;
 	margin: 1rem 0;
