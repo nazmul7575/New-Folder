@@ -5,7 +5,7 @@
  */
 
 // Globals
-let div = null;
+let toastContainer = null;
 
 // onload hendler
 document.addEventListener("DOMContentLoaded", main);
@@ -19,6 +19,8 @@ function main() {
 	const colorSliderRed = document.getElementById("color_slider_red");
 	const colorSliderGreen = document.getElementById("color_slider_green");
 	const colorSliderBlue = document.getElementById("color_slider_blue");
+	const copyToClipboardBtn = document.getElementById("copy_to_clipboard");
+	const colorModeRadios = document.getElementsByName("color-mode");
 
 	// event listener
 	generateRandomColorBtn.addEventListener(
@@ -39,6 +41,21 @@ function main() {
 		"change",
 		handleColorSliders(colorSliderRed, colorSliderGreen, colorSliderBlue)
 	);
+
+	copyToClipboardBtn.addEventListener("click", function () {
+		const mode = getCheckedValueFromRadios(colorModeRadios);
+		if (mode === null) {
+			throw new Error("Invalid Radio Input");
+		}
+
+		if (mode === "hex") {
+			const hexColor = document.getElementById("input_hex").value;
+			navigator.clipboard.writeText(`#${hexColor}`);
+		} else {
+			const rgbColor = document.getElementById("input_rgb").value;
+			navigator.clipboard.writeText(`#${rgbColor}`);
+		}
+	});
 
 	// copyBtn.addEventListener("click", function () {
 	// 	navigator.clipboard.writeText(`#${output.value}`);
@@ -96,22 +113,44 @@ function handleColorSliders(colorSliderRed, colorSliderGreen, colorSliderBlue) {
 }
 
 // DOM functions
+/**
+ * Generate a dynamic DOM element to show a toasr message
+ * @param {string} msg
+ * @returns {void}
+ */
 function generateToastMessage(msg) {
-	div = document.createElement("div");
-	div.innerText = msg;
-	div.className = "toast-message toast-message-slide-in";
+	toastContainer = document.createElement("div");
+	toastContainer.innerText = msg;
+	toastContainer.className = "toast-message toast-message-slide-in";
 
-	div.addEventListener("click", function () {
-		div.classList.remove("toast-message-slide-in");
-		div.classList.add("toast-message-slide-out");
+	toastContainer.addEventListener("click", function () {
+		toastContainer.classList.remove("toast-message-slide-in");
+		toastContainer.classList.add("toast-message-slide-out");
 
-		div.addEventListener("animationend", function () {
-			div.remove();
-			div = null;
+		toastContainer.addEventListener("animationend", function () {
+			toastContainer.remove();
+			toastContainer = null;
 		});
 	});
 
 	document.body.appendChild(div);
+}
+
+/**
+ * find the checked elements from a list of radio buttons
+ * @param {Array} nodes
+ * @returns {string | null}
+ */
+// This function isn't clear to me. Let ask Mehedi
+function getCheckedValueFromRadios(nodes) {
+	let checkedValue = null;
+	for (let i = 0; i < nodes.length; i++) {
+		if (nodes[i].checked) {
+			checkedValue = nodes[i].value;
+			break;
+		}
+	}
+	return checkedValue;
 }
 
 /**
