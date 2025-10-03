@@ -9,7 +9,7 @@
 body {
 	font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 	font-size: 16px;
-	background-color: #222020;
+	background-color: #dddeee;
 	width: 100vw;
 	height: 100vh;
 }
@@ -168,7 +168,7 @@ label {
 	top: 2rem;
 	right: 2rem;
 	background-color: rgb(19, 201, 110);
-	color: #000;
+	color: #fff;
 	border: 1px solid #fff;
 	border-radius: 0.25rem;
 	padding: 1rem 2rem;

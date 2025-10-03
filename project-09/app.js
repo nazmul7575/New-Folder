@@ -7,8 +7,17 @@
 // Globals
 let toastContainer = null;
 
+const defaultColor = {
+	red: 221,
+	green: 222,
+	blue: 238,
+};
+
 // onload hendler
-document.addEventListener("DOMContentLoaded", main);
+document.addEventListener("DOMContentLoaded", () => {
+	main();
+	updateColorCodeToDom(defaultColor);
+});
 
 //  main or boot function, this function will take care of getting all the DOM references
 function main() {
@@ -20,7 +29,6 @@ function main() {
 	const colorSliderGreen = document.getElementById("color_slider_green");
 	const colorSliderBlue = document.getElementById("color_slider_blue");
 	const copyToClipboardBtn = document.getElementById("copy_to_clipboard");
-	const colorModeRadios = document.getElementsByName("color-mode");
 
 	// event listener
 	generateRandomColorBtn.addEventListener(
@@ -42,46 +50,7 @@ function main() {
 		handleColorSliders(colorSliderRed, colorSliderGreen, colorSliderBlue)
 	);
 
-	copyToClipboardBtn.addEventListener("click", function () {
-		const mode = getCheckedValueFromRadios(colorModeRadios);
-		if (mode === null) {
-			throw new Error("Invalid Radio Input");
-		}
-
-		if (mode === "hex") {
-			const hexColor = document.getElementById("input_hex").value;
-			navigator.clipboard.writeText(`#${hexColor}`);
-		} else {
-			const rgbColor = document.getElementById("input_rgb").value;
-			navigator.clipboard.writeText(`#${rgbColor}`);
-		}
-	});
-
-	// copyBtn.addEventListener("click", function () {
-	// 	navigator.clipboard.writeText(`#${output.value}`);
-	// 	if (div !== null) {
-	// 		div.remove();
-	// 		div = null;
-	// 	}
-	// 	if (isValidHex(output.value)) {
-	// 		generateToastMessage(`#${output.value} copied`);
-	// 	} else {
-	// 		alert("Invalid Color Code");
-	// 	}
-	// });
-
-	// copyBtn2.addEventListener("click", function () {
-	// 	navigator.clipboard.writeText(`#${output2.value}`);
-	// 	if (div !== null) {
-	// 		div.remove();
-	// 		div = null;
-	// 	}
-	// 	if (isValidHex(output.value)) {
-	// 		generateToastMessage(`#${output2.value} copied`);
-	// 	} else {
-	// 		alert("Invalid Color Code");
-	// 	}
-	// });
+	copyToClipboardBtn.addEventListener("click", handleCopyToClipboard);
 }
 
 // Events handlers
@@ -112,6 +81,37 @@ function handleColorSliders(colorSliderRed, colorSliderGreen, colorSliderBlue) {
 	};
 }
 
+function handleCopyToClipboard() {
+	const colorModeRadios = document.getElementsByName("color-mode");
+	const mode = getCheckedValueFromRadios(colorModeRadios);
+	if (mode === null) {
+		throw new Error("Invalid Radio Input");
+	}
+
+	if (toastContainer !== null) {
+		toastContainer.remove();
+		toastContainer = null;
+	}
+
+	if (mode === "hex") {
+		const hexColor = document.getElementById("input_hex").value;
+		if (hexColor && isValidHex(hexColor)) {
+			navigator.clipboard.writeText(`#${hexColor}`);
+			generateToastMessage(`#${hexColor} Copied`);
+		} else {
+			alert("Invalid Hex Code");
+		}
+	} else {
+		const rgbColor = document.getElementById("input_rgb").value;
+		if (rgbColor) {
+			navigator.clipboard.writeText(`#${rgbColor}`);
+			generateToastMessage(`${rgbColor} Copied`);
+		} else {
+			alert("Invalid RGB Color");
+		}
+	}
+}
+
 // DOM functions
 /**
  * Generate a dynamic DOM element to show a toasr message
@@ -133,7 +133,7 @@ function generateToastMessage(msg) {
 		});
 	});
 
-	document.body.appendChild(div);
+	document.body.appendChild(toastContainer);
 }
 
 /**
