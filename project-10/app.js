@@ -13,10 +13,43 @@ const defaultColor = {
 	blue: 238,
 };
 
+const defaultPresetColors = [
+	"#ffcdd2",
+	"#f8bbd0",
+	"#e1bee7",
+	"#ff8a80",
+	"#ff80ab",
+	"#ea80fc",
+	"#b39ddb",
+	"#9fa8da",
+	"#90caf9",
+	"#b388ff",
+	"#8c9eff",
+	"#82b1ff",
+	"#03a9f4",
+	"#00bcd4",
+	"#009688",
+	"#80d8ff",
+	"#84ffff",
+	"#a7ffeb",
+	"#c8e6c9",
+	"#dcedc8",
+	"#f0f4c3",
+	"#b9f6ca",
+	"#ccff90",
+	"#ffcc80",
+];
+const copySound = new Audio("/project-10/copy-sound.wav");
+
 // onload hendler
 document.addEventListener("DOMContentLoaded", () => {
 	main();
 	updateColorCodeToDom(defaultColor);
+	// displlay preset colors
+	displayColorBoxes(
+		document.getElementById("preset_colors"),
+		defaultPresetColors
+	);
 });
 
 //  main or boot function, this function will take care of getting all the DOM references
@@ -29,6 +62,7 @@ function main() {
 	const colorSliderGreen = document.getElementById("color_slider_green");
 	const colorSliderBlue = document.getElementById("color_slider_blue");
 	const copyToClipboardBtn = document.getElementById("copy_to_clipboard");
+	const presetClorsParent = document.getElementById("preset_colors");
 
 	// event listener
 	generateRandomColorBtn.addEventListener(
@@ -51,6 +85,7 @@ function main() {
 	);
 
 	copyToClipboardBtn.addEventListener("click", handleCopyToClipboard);
+	presetClorsParent.addEventListener("click", handlePresetColorsParent);
 }
 
 // Events handlers
@@ -109,6 +144,15 @@ function handleCopyToClipboard() {
 		} else {
 			alert("Invalid RGB Color");
 		}
+	}
+}
+
+function handlePresetColorsParent(event) {
+	const child = event.target;
+	if (child.className === "color-box") {
+		navigator.clipboard.writeText(child.getAttribute("data-color"));
+		copySound.volume = 0.2;
+		copySound.play();
 	}
 }
 
@@ -173,6 +217,33 @@ function updateColorCodeToDom(color) {
 	document.getElementById("color_slider_blue").value = color.blue;
 	document.getElementById("color_slider_blue_label").innerText = color.blue;
 }
+
+/**
+ * create a div element with class name of color-box
+ * @param {string} color
+ * @returns {object}
+ */
+function generateColorBox(color) {
+	const div = document.createElement("div");
+	div.className = "color-box";
+	div.style.backgroundColor = color;
+	div.setAttribute("data-color", color);
+
+	return div;
+}
+
+/**
+ * this function will create and append new color boxes to it's parent
+ * @param {object} parent
+ * @param {Array} colors
+ */
+function displayColorBoxes(parent, colors) {
+	colors.forEach((color) => {
+		const colorBox = generateColorBox(color);
+		parent.appendChild(colorBox);
+	});
+}
+
 // Utils
 
 /**
