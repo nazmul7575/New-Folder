@@ -39,7 +39,8 @@ const defaultPresetColors = [
 	"#ccff90",
 	"#ffcc80",
 ];
-const copySound = new Audio("/project-10/copy-sound.wav");
+const customColors = [];
+const copySound = new Audio("/project-11/copy-sound.wav");
 
 // onload hendler
 document.addEventListener("DOMContentLoaded", () => {
@@ -62,7 +63,9 @@ function main() {
 	const colorSliderGreen = document.getElementById("color_slider_green");
 	const colorSliderBlue = document.getElementById("color_slider_blue");
 	const copyToClipboardBtn = document.getElementById("copy_to_clipboard");
-	const presetClorsParent = document.getElementById("preset_colors");
+	const saveToCustomBtn = document.getElementById("save_to_custom");
+	const presetColorsParent = document.getElementById("preset_colors");
+	const customColorsParent = document.getElementById("custom_colors");
 
 	// event listener
 	generateRandomColorBtn.addEventListener(
@@ -85,7 +88,11 @@ function main() {
 	);
 
 	copyToClipboardBtn.addEventListener("click", handleCopyToClipboard);
-	presetClorsParent.addEventListener("click", handlePresetColorsParent);
+	presetColorsParent.addEventListener("click", handlePresetColorsParent);
+	saveToCustomBtn.addEventListener(
+		"click",
+		handleSaveToCustomBtn(customColorsParent, colorModeHexInp)
+	);
 }
 
 // Events handlers
@@ -154,6 +161,14 @@ function handlePresetColorsParent(event) {
 		copySound.volume = 0.2;
 		copySound.play();
 	}
+}
+
+function handleSaveToCustomBtn(customColorsParent, inputHex) {
+	return function () {
+		customColors.push(`#${inputHex.value}`);
+		removeChildren(customColorsParent);
+		displayColorBoxes(customColorsParent, customColors);
+	};
 }
 
 // DOM functions
@@ -242,6 +257,18 @@ function displayColorBoxes(parent, colors) {
 		const colorBox = generateColorBox(color);
 		parent.appendChild(colorBox);
 	});
+}
+
+/**
+ * remove all children from parent
+ * @param {object} parent
+ */
+function removeChildren(parent) {
+	let child = parent.lastElementChild;
+	while (child) {
+		parent.removeChild(child);
+		child = parent.lastElementChild;
+	}
 }
 
 // Utils
