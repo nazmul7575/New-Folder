@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Projct-11</title>
+    <link rel="stylesheet" href="/project-12/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- display section -->
+        <section class="section">
+            <div class="section-header">
+                <h3 class="sectiom-title">Display Color</h3>
+                <button class="section-header-action" id="generate_random_color">Random Color</button>
+            </div>
+            <div class="dividor"></div>
+            <div class="color-display" id="color_display"></div>
+        </section>
+
+        <!-- Change & Copy Color -->
+        <section class="section">
+            <section class="section-header">
+                <h3 class="section-title">Change & Copy Color</h3>
+                <div class="section-header-action-group">
+                    <button class="section-header-action" id="save_to_custom">Save</button>
+                    <button class="section-header-action" id="copy_to_clipboard">Copy</button>
+                </div>
+            </section>
+            <div class="dividor"></div>
+            <div class="select-copy-mode">
+                <p class="lead">Select Copy Mode</p>
+                <div class="mode-radio-group">
+                    <div class="mode-input-group">
+                        <input type="radio" name="color-mode" id="color_mode_hex" value="hex" checked>
+                        <label for="color_mode_hex">Hex</label>
+                    </div>
+                    <div class="mode-input-group">
+                        <input type="radio" name="color-mode" id="color_mode_rgb" value="rgb">
+                        <label for="color_mode_rgb">RGB</label>
+                    </div>
+                </div>
+            </div>
+            <div class="selected-color-code">
+                <div class="hex-input-group">
+                    <label for="input-hex" class="lead">Hex</label>
+                    <input type="text" placeholder="dddeee" id="input_hex" class="text-input hex-input">
+                    <div class="hex-icon">#</div>
+                </div>
+                <div class="rgb-input-group">
+                    <label for="input-group" class="lead">RGB</label>
+                    <input type="text" placeholder="rgb(221, 222, 238)" id="input_rgb" class="text-input" disabled>
+                </div>
+            </div>
+            <div class="color-sliders">
+                <p class="lead">Adjust RGB Colors</p>
+                <div class="color-sliders-group">
+                    <div>
+                        <div class="slider-label-group">
+                            <p>Red</p>
+                            <p id="color_slider_red_label">221</p>
+                        </div>
+                        <input type="range" min="0" max="255" value="221" class="color-slider" id="color_slider_red">
+                    </div>
+                    <div>
+                        <div class="slider-label-group">
+                            <p>Green</p>
+                            <p id="color_slider_green_label">222</p>
+                        </div>
+                        <input type="range" min="0" max="255" value="222" class="color-slider" id="color_slider_green">
+                    </div>
+                    <div>
+                        <div class="slider-label-group">
+                            <p>Blue</p>
+                            <p id="color_slider_blue_label">238</p>
+                        </div>
+                        <input type="range" min="0" max="255" value="238" class="color-slider" id="color_slider_blue">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="section-header">
+                <h3 class="section-title">Preset Colors</h3>
+            </div>
+            <div class="dividor"></div>
+            <div class="preset-colors" id="preset_colors">
+            </div>
+        </section>
+        <section class="section">
+            <div class="section-header">
+                <h3 class="section-title">Custom Colors</h3>
+            </div>
+            <div class="dividor"></div>
+            <div class="preset-colors" id="custom_colors">
+            </div>
+        </section>
+    </div>
+
+
+
+    <script src="/project-12/app.js"></script>
+</body>
+
+</html>
