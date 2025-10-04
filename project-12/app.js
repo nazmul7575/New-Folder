@@ -39,7 +39,7 @@ const defaultPresetColors = [
 	"#ccff90",
 	"#ffcc80",
 ];
-const customColors = [];
+let customColors = new Array(24);
 const copySound = new Audio("/project-11/copy-sound.wav");
 
 // onload hendler
@@ -51,6 +51,14 @@ document.addEventListener("DOMContentLoaded", () => {
 		document.getElementById("preset_colors"),
 		defaultPresetColors
 	);
+	const customColorsString = localStorage.getItem("custom_colors");
+	if (customColorsString) {
+		customColors = JSON.parse(customColorsString);
+		displayColorBoxes(
+			document.getElementById("custom_colors"),
+			customColors
+		);
+	}
 });
 
 //  main or boot function, this function will take care of getting all the DOM references
@@ -165,7 +173,16 @@ function handlePresetColorsParent(event) {
 
 function handleSaveToCustomBtn(customColorsParent, inputHex) {
 	return function () {
-		customColors.push(`#${inputHex.value}`);
+		const color = `#${inputHex.value}`;
+		if (customColors.includes(color)) {
+			alert(`Already in your list`);
+			return;
+		}
+		customColors.unshift(color);
+		if (customColors.length > 24) {
+			customColors = customColors.slice(0, 24);
+		}
+		localStorage.setItem(`custom_colors`, JSON.stringify(customColors));
 		removeChildren(customColorsParent);
 		displayColorBoxes(customColorsParent, customColors);
 	};
@@ -254,8 +271,10 @@ function generateColorBox(color) {
  */
 function displayColorBoxes(parent, colors) {
 	colors.forEach((color) => {
-		const colorBox = generateColorBox(color);
-		parent.appendChild(colorBox);
+		if (isValidHex(color.slice(1))) {
+			const colorBox = generateColorBox(color);
+			parent.appendChild(colorBox);
+		}
 	});
 }
 
