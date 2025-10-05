@@ -112,9 +112,9 @@ function main() {
 	bgFileInput.addEventListener("change", function (event) {
 		const file = event.target.files[0];
 		const imgUrl = URL.createObjectURL(file);
-		console.log(imgUrl);
 
 		bgPreview.style.backgroundImage = `url(${imgUrl})`;
+		document.body.style.background = `url(${imgUrl})`;
 	});
 }
 

@@ -240,13 +240,14 @@ label {
 
 .background-image {
 	width: 100%;
+	height: auto;
 	padding-top: 56.25%;
 	border-radius: 0.25rem;
 	background-color: #dddeee;
 	margin-top: 0.5rem;
 	background-repeat: no-repeat;
-	background-size: 100% 100%;
-	background-position: bottom;
+	background-size: cover;
+	background-position: center;
 }
 
 .background-control {
