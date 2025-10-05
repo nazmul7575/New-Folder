@@ -78,7 +78,7 @@ function main() {
 	const bgFileInput = document.getElementById("bg_file_input");
 	const bgFileInputBtn = document.getElementById("bg_file_input_btn");
 	const bgFileDeleteBtn = document.getElementById("bg_file_delete_btn");
-	bgFileDeleteBtn.style.display = none;
+	bgFileDeleteBtn.style.display = "none";
 
 	// event listener
 	generateRandomColorBtn.addEventListener(
@@ -117,6 +117,16 @@ function main() {
 
 		bgPreview.style.backgroundImage = `url(${imgUrl})`;
 		document.body.style.background = `url(${imgUrl})`;
+		bgFileDeleteBtn.style.display = "block";
+	});
+
+	bgFileDeleteBtn.addEventListener("click", function () {
+		bgPreview.style.backgroundImage = "none";
+		bgPreview.style.backgroundImage = "#ddd";
+		document.body.style.background = "none";
+		document.body.style.background = "#ddd";
+		bgFileDeleteBtn.style.display = "none";
+		bgFileInput.value = null;
 	});
 }
 
