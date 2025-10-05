@@ -74,6 +74,9 @@ function main() {
 	const saveToCustomBtn = document.getElementById("save_to_custom");
 	const presetColorsParent = document.getElementById("preset_colors");
 	const customColorsParent = document.getElementById("custom_colors");
+	const bgPreview = document.getElementById("bg_preview");
+	const bgFileInput = document.getElementById("bg_file_input");
+	const bgFileInputBtn = document.getElementById("bg_file_input_btn");
 
 	// event listener
 	generateRandomColorBtn.addEventListener(
@@ -101,6 +104,18 @@ function main() {
 		"click",
 		handleSaveToCustomBtn(customColorsParent, colorModeHexInp)
 	);
+
+	bgFileInputBtn.addEventListener("click", function () {
+		bgFileInput.click();
+	});
+
+	bgFileInput.addEventListener("change", function (event) {
+		const file = event.target.files[0];
+		const imgUrl = URL.createObjectURL(file);
+		console.log(imgUrl);
+
+		bgPreview.style.backgroundImage = `url(${imgUrl})`;
+	});
 }
 
 // Events handlers
