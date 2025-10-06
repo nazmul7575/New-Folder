@@ -1,0 +1,27 @@
+body {
+	font-family: "Poppins", sans-serif;
+	background-color: #dedeee;
+	margin-top: 50px;
+}
+
+.container {
+	width: 600px;
+	padding: 20px;
+	margin: auto;
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 0 10px #000;
+}
+
+.header-title {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0;
+}
+
+.divider {
+	height: 1px;
+	background-color: #292626;
+	margin-bottom: 20px;
+}
