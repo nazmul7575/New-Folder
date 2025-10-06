@@ -270,3 +270,12 @@ label {
 	outline: none;
 	cursor: pointer;
 }
+
+.background-right-panel {
+	padding: 1rem;
+	width: 100%;
+}
+
+.select-group {
+	margin-bottom: 1rem;
+}

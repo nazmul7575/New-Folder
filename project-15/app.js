@@ -79,6 +79,8 @@ function main() {
 	const bgFileInputBtn = document.getElementById("bg_file_input_btn");
 	const bgFileDeleteBtn = document.getElementById("bg_file_delete_btn");
 	bgFileDeleteBtn.style.display = "none";
+	const bgController = document.getElementById("bg_controller");
+	bgController.style.display = "none";
 
 	// event listener
 	generateRandomColorBtn.addEventListener(
@@ -111,23 +113,33 @@ function main() {
 		bgFileInput.click();
 	});
 
-	bgFileInput.addEventListener("change", function (event) {
-		const file = event.target.files[0];
-		const imgUrl = URL.createObjectURL(file);
+	bgFileInput.addEventListener(
+		"change",
+		handleBgFileInput(bgPreview, bgFileDeleteBtn, bgController)
+	);
 
-		bgPreview.style.backgroundImage = `url(${imgUrl})`;
-		document.body.style.background = `url(${imgUrl})`;
-		bgFileDeleteBtn.style.display = "block";
-	});
+	bgFileDeleteBtn.addEventListener(
+		"click",
+		handleBgFileDeleteBtn(
+			bgPreview,
+			bgFileDeleteBtn,
+			bgController,
+			bgFileInput
+		)
+	);
 
-	bgFileDeleteBtn.addEventListener("click", function () {
-		bgPreview.style.backgroundImage = "none";
-		bgPreview.style.backgroundImage = "#ddd";
-		document.body.style.background = "none";
-		document.body.style.background = "#ddd";
-		bgFileDeleteBtn.style.display = "none";
-		bgFileInput.value = null;
-	});
+	document
+		.getElementById("bg_size")
+		.addEventListener("change", changeBackgroundPreferences);
+	document
+		.getElementById("bg_repeat")
+		.addEventListener("change", changeBackgroundPreferences);
+	document
+		.getElementById("bg_position")
+		.addEventListener("change", changeBackgroundPreferences);
+	document
+		.getElementById("bg_attachment")
+		.addEventListener("change", changeBackgroundPreferences);
 }
 
 // Events handlers
@@ -212,6 +224,34 @@ function handleSaveToCustomBtn(customColorsParent, inputHex) {
 		localStorage.setItem(`custom_colors`, JSON.stringify(customColors));
 		removeChildren(customColorsParent);
 		displayColorBoxes(customColorsParent, customColors);
+	};
+}
+
+function handleBgFileInput(bgPreview, bgFileDeleteBtn, bgController) {
+	return function (event) {
+		const file = event.target.files[0];
+		const imgUrl = URL.createObjectURL(file);
+		bgPreview.style.backgroundImage = `url(${imgUrl})`;
+		document.body.style.background = `url(${imgUrl})`;
+		bgFileDeleteBtn.style.display = "block";
+		bgController.style.display = "block";
+	};
+}
+
+function handleBgFileDeleteBtn(
+	bgPreview,
+	bgFileDeleteBtn,
+	bgController,
+	bgFileInput
+) {
+	return function () {
+		bgPreview.style.backgroundImage = "none";
+		bgPreview.style.backgroundImage = "#ddd";
+		document.body.style.background = "none";
+		document.body.style.background = "#ddd";
+		bgFileDeleteBtn.style.display = "none";
+		bgController.style.display = "none";
+		bgFileInput.value = null;
 	};
 }
 
@@ -315,6 +355,17 @@ function removeChildren(parent) {
 		parent.removeChild(child);
 		child = parent.lastElementChild;
 	}
+}
+
+function changeBackgroundPreferences() {
+	document.body.style.backgroundSize =
+		document.getElementById("bg_size").value;
+	document.body.style.backgroundRepeat =
+		document.getElementById("bg_repeat").value;
+	document.body.style.backgroundPosition =
+		document.getElementById("bg_position").value;
+	document.body.style.backgroundAttachment =
+		document.getElementById("bg_attachment").value;
 }
 
 // Utils
