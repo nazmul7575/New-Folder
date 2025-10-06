@@ -1,16 +1,11 @@
 body {
 	font-family: "Poppins", sans-serif;
-	background-color: #dedeee;
-	margin-top: 50px;
 }
 
 .container {
 	width: 600px;
-	padding: 20px;
+	padding: auto;
 	margin: auto;
-	background-color: #fff;
-	border-radius: 10px;
-	box-shadow: 0 0 10px #000;
 }
 .header {
 	display: flex;
@@ -20,8 +15,6 @@ body {
 
 h1 {
 	color: #2c2c2c;
-	font-weight: 500;
-	padding-bottom: 5px;
 }
 
 button {
@@ -48,8 +41,8 @@ p {
 .divider {
 	height: 1px;
 	background-color: #8b8a8a;
-	margin-top: -30px;
-	margin-bottom: 20px;
+	margin-top: 50px;
+	margin-bottom: 10px;
 }
 
 .text-input {
@@ -57,4 +50,5 @@ p {
 	padding-top: 5px;
 	padding-bottom: 5px;
 	border-radius: 5px;
+	outline: none;
 }

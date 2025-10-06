@@ -1,0 +1,88 @@
+body {
+	font-family: "Poppins", sans-serif;
+	background-color: #dedeee;
+	margin-top: 50px;
+}
+
+.container {
+	width: 600px;
+	padding: 20px;
+	margin: auto;
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 0 10px #000;
+}
+
+.header-title {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0;
+}
+
+.small {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0;
+}
+
+.display {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.display-text {
+	font-size: 6rem;
+	margin: 0;
+	font-weight: 400;
+}
+
+h1 {
+	color: #2c2c2c;
+	font-weight: 500;
+	padding-bottom: 5px;
+}
+
+button {
+	padding: 5px 10px;
+	background-color: #000;
+	border: 0px;
+	border-radius: 5px;
+	color: #ddd;
+	font-size: 16px;
+	font-weight: 900;
+	cursor: pointer;
+}
+
+button:hover {
+	background-color: #fff;
+	color: #000;
+	transition: 0.8s ease-in-out;
+}
+
+.divider {
+	height: 1px;
+	background-color: #8b8a8a;
+	margin-bottom: 20px;
+}
+
+.controllers {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	padding: 10px 0px;
+}
+
+.text-input {
+	width: 180px;
+	padding: 5px 2px;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.btn-group {
+	display: flex;
+	gap: 10px;
+}
