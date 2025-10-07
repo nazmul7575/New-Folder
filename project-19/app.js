@@ -16,13 +16,19 @@ const converter = {
 	time: {
 		name: "Time",
 	},
-	DataTransferRate: {
-		name: "Data Transfer Rate",
+	pressure: {
+		name: "Pressure",
 	},
 };
 
 function main() {
 	const categorySelect = document.getElementById("category_select");
+
+	const converterKeys = Object.keys(converter).sort();
+	removeAllChild(categorySelect);
+	converterKeys.forEach((item) => {
+		addOption(categorySelect, { value: item, text: converter[item].name });
+	});
 }
 
 function addOption(parent, option) {
@@ -31,4 +37,12 @@ function addOption(parent, option) {
 	opt.innerText = option.text;
 
 	parent.appendChild(opt);
+}
+
+function removeAllChild(parent) {
+	while (parent.firstChild) {
+		{
+			parent.firstChild.remove();
+		}
+	}
 }
