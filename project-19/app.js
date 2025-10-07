@@ -23,11 +23,11 @@ const converter = {
 	length: {
 		name: "Length",
 		units: {
-			squareM: "Square Meter",
 			kilometer: "Kilometer",
 			meter: "Meter",
 			centimeter: "Centimeter",
 			millimeter: "Millimeter",
+			mile: "Mile",
 		},
 	},
 	time: {
@@ -52,46 +52,12 @@ function main() {
 		addOption(categorySelect, { value: item, text: converter[item].name });
 	});
 
+	// set default category units
+	updateCategoryChanges(categorySelect, leftSelect, rightSelect);
+
 	categorySelect.addEventListener("change", function () {
-		const converterName = categorySelect.value;
-		const units = converter[converterName].units;
-
-		// handle left select
-		removeAllChild(leftSelect);
-		const leftOptions = Object.keys(units);
-		leftOptions.forEach((item) => {
-			addOption(leftSelect, { value: item, text: units[item] });
-		});
-
-		// handle right select
-		removeAllChild(rightSelect);
-		const rightOptions = Object.keys(units);
-		rightOptions.forEach((item) => {
-			addOption(rightSelect, { value: item, text: units[item] });
-		});
-
-		rightSelect.value = rightOptions[1];
+		updateCategoryChanges(categorySelect, leftSelect, rightSelect);
 	});
-
-	const converterName = categorySelect.value;
-	const units = converter[converterName].units;
-
-	// handle left select
-	removeAllChild(leftSelect);
-	const leftOptions = Object.keys(units);
-	leftOptions.forEach((item) => {
-		addOption(leftSelect, { value: item, text: units[item] });
-	});
-
-	// handle right select
-	removeAllChild(rightSelect);
-	const rightOptions = Object.keys(units);
-	rightOptions.forEach((item) => {
-		addOption(rightSelect, { value: item, text: units[item] });
-	});
-
-	rightSelect.value = rightOptions[1];
-	console.log(rightOptions[1]);
 }
 
 function addOption(parent, option) {
@@ -104,8 +70,28 @@ function addOption(parent, option) {
 
 function removeAllChild(parent) {
 	while (parent.firstChild) {
-		{
-			parent.firstChild.remove();
-		}
+		parent.firstChild.remove();
 	}
+}
+
+function updateCategoryChanges(categorySelect, leftSelect, rightSelect) {
+	const converterName = categorySelect.value;
+	const units = converter[converterName].units;
+	const options = Object.keys(units).sort();
+
+	// handle left select
+	removeAllChild(leftSelect);
+
+	options.forEach((item) => {
+		addOption(leftSelect, { value: item, text: units[item] });
+	});
+
+	// handle right select
+	removeAllChild(rightSelect);
+
+	options.forEach((item) => {
+		addOption(rightSelect, { value: item, text: units[item] });
+	});
+
+	rightSelect.value = options[1];
 }
