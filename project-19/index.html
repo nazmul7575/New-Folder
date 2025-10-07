@@ -10,6 +10,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Lobster&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
 </head>
 
@@ -17,6 +20,40 @@
     <div class="container">
         <h1 class="header-title">Multiple Converter</h1>
         <div class="divider"></div>
+        <div class="category-wrap">
+            <label class="lead" for="category-select">Select Category</label>
+            <select class="text-input" id="category_select">
+                <option value="mass">Mass</option>
+                <option value="length">Length</option>
+                <option value="area">Area</option>
+            </select>
+        </div>
+        <div class="input-group-wrap">
+            <div>
+                <input type="text" class="text-input" id="left_inp">
+                <select class="text-input" id="left_select">
+                    <option value="KM">Kilometer</option>
+                    <option value="M">Meter</option>
+                    <option value="CM">Centimeter</option>
+                </select>
+            </div>
+            <div class="equal">=</div>
+            <div>
+                <input type="text" class="text-input" id="left_inp">
+                <select class="text-input" id="right_select">
+                    <option value="KM">Kilometer</option>
+                    <option value="M">Meter</option>
+                    <option value="CM">Centimeter</option>
+                </select>
+            </div>
+
+        </div>
+        <div class="formula-wrap">
+            <h3>Formula</h3>
+            <p id="formula_text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempora, magni deleniti,
+                recusandae odio minus repellat non consequuntur a ratione nostrum quo amet consequatur maxime sapiente
+                officiis, illo officia eligendi excepturi.</p>
+        </div>
     </div>
 
 
