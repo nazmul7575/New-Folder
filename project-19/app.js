@@ -237,7 +237,7 @@ function removeAllChild(parent) {
 function updateCategoryChanges(categorySelect, leftSelect, rightSelect) {
 	const converterName = categorySelect.value;
 	const units = converter[converterName].units;
-	const options = Object.keys(units).sort();
+	const options = Object.keys(units);
 
 	// handle left select
 	removeAllChild(leftSelect);
@@ -258,4 +258,16 @@ function updateCategoryChanges(categorySelect, leftSelect, rightSelect) {
 	lastRightSelectedValue = rightSelect.value;
 }
 
-function calculatevalue() {}
+function calculatevalue(categorySelect, leftSelect, rightSelect) {
+	const leftInput = document.getElementById("left_inp");
+	const rightInput = document.getElementById("right_inp");
+	const formulaText = document.getElementById("formula_text");
+
+	const converterName = categorySelect.value;
+	const variants = converter[converterName].variants;
+	const variantkey = `${leftSelect.value}:${rightSelect.value}`;
+	const variant = variants[variantkey];
+	formulaText.innerText = variant.formula;
+	leftInput.value = 1;
+	rightInput.value = variant.calculation(1);
+}
