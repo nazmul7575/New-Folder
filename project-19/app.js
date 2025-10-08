@@ -144,7 +144,44 @@ const converter = {
 			tonne: "Tonne",
 			kilogram: "Kilogram",
 			gram: "Gram",
-			miligram: "Miligram",
+		},
+		variants: {
+			"tonne:kilogram": {
+				formula: "multiply the mass value by 1000",
+				calculation(n) {
+					return n * 1000;
+				},
+			},
+			"tonne:gram": {
+				formula: "multiply the mass value by 100000",
+				calculation(n) {
+					return n * 100000;
+				},
+			},
+			"kilogram:tonne": {
+				formula: "multiply the mass value by 1000",
+				calculation(n) {
+					return n / 1000;
+				},
+			},
+			"kilogram:gram": {
+				formula: "divide the mass value by 1000000",
+				calculation(n) {
+					return n * 1000;
+				},
+			},
+			"gram:kilogram": {
+				formula: "divide the time value by 1000",
+				calculation(n) {
+					return n / 1000;
+				},
+			},
+			"gram:tonne": {
+				formula: "divide the time value by 1000000",
+				calculation(n) {
+					return n / 1000000;
+				},
+			},
 		},
 	},
 	length: {
@@ -153,8 +190,44 @@ const converter = {
 			kilometer: "Kilometer",
 			meter: "Meter",
 			centimeter: "Centimeter",
-			millimeter: "Millimeter",
-			mile: "Mile",
+		},
+		variants: {
+			"kilometer:meter": {
+				formula: "multiply the lenth value by 1000",
+				calculation(n) {
+					return n * 1000;
+				},
+			},
+			"kilometer:centimeter": {
+				formula: "divide the time value by 1000000",
+				calculation(n) {
+					return n * 1000000;
+				},
+			},
+			"meter:kilometer": {
+				formula: "divide the lenth value by 1000",
+				calculation(n) {
+					return n / 1000;
+				},
+			},
+			"meter:centimeter": {
+				formula: "multiply the time value by 100",
+				calculation(n) {
+					return n * 100;
+				},
+			},
+			"centimeter:kilometer": {
+				formula: "divide the time value by 1000000",
+				calculation(n) {
+					return n / 1000000;
+				},
+			},
+			"centimeter:meter": {
+				formula: "divide the time value by 100",
+				calculation(n) {
+					return n / 100;
+				},
+			},
 		},
 	},
 	time: {
@@ -163,7 +236,44 @@ const converter = {
 			second: "Second",
 			minute: "Minute",
 			hour: "Hour",
-			day: "Day",
+		},
+		variants: {
+			"second:minute": {
+				formula: "divide the time value by 60",
+				calculation(n) {
+					return n / 60;
+				},
+			},
+			"second:hour": {
+				formula: "divide the time value by 3600",
+				calculation(n) {
+					return n / 3600;
+				},
+			},
+			"minute:second": {
+				formula: "multiply the time value by 60",
+				calculation(n) {
+					return n * 60;
+				},
+			},
+			"minute:hour": {
+				formula: "divide the time value by 60",
+				calculation(n) {
+					return n / 60;
+				},
+			},
+			"hour:second": {
+				formula: "multiply the time value by 3600",
+				calculation(n) {
+					return n * 3600;
+				},
+			},
+			"hour:minute": {
+				formula: "multiply the time value by 60",
+				calculation(n) {
+					return n * 60;
+				},
+			},
 		},
 	},
 };
