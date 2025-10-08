@@ -175,6 +175,8 @@ function main() {
 	const categorySelect = document.getElementById("category_select");
 	const leftSelect = document.getElementById("left_select");
 	const rightSelect = document.getElementById("right_select");
+	const leftInput = document.getElementById("left_inp");
+	const rightInput = document.getElementById("right_inp");
 
 	const converterKeys = Object.keys(converter).sort();
 	removeAllChild(categorySelect);
@@ -187,6 +189,32 @@ function main() {
 
 	categorySelect.addEventListener("change", function () {
 		updateCategoryChanges(categorySelect, leftSelect, rightSelect);
+	});
+
+	leftInput.addEventListener("keyup", function (event) {
+		if (event.target.value && !isNaN(event.target.value)) {
+			const converterName = categorySelect.value;
+			const variants = converter[converterName].variants;
+			const variantKey = `${leftSelect.value}:${rightSelect.value}`;
+			const variant = variants[variantKey];
+			leftInput.value = Number(event.target.value);
+			rightInput.value = variant.calculation(Number(event.target.value));
+		} else {
+			rightInput.value = "";
+		}
+	});
+
+	rightInput.addEventListener("keyup", function (event) {
+		if (event.target.value && !isNaN(event.target.value)) {
+			const converterName = categorySelect.value;
+			const variants = converter[converterName].variants;
+			const variantKey = `${leftSelect.value}:${rightSelect.value}`;
+			const variant = variants[variantKey];
+			rightInput.value = Number(event.target.value);
+			leftInput.value = variant.calculation(Number(event.target.value));
+		} else {
+			leftInput.value = "";
+		}
 	});
 
 	leftSelect.addEventListener("change", function (event) {
@@ -203,6 +231,7 @@ function main() {
 			}
 		}
 		lastLeftSelectedValue = event.target.value;
+		calculateValue(categorySelect, leftSelect, rightSelect);
 	});
 
 	rightSelect.addEventListener("change", function (event) {
@@ -217,6 +246,7 @@ function main() {
 			}
 		}
 		lastRightSelectedValue = event.target.value;
+		calculateValue(categorySelect, leftSelect, rightSelect);
 	});
 }
 
@@ -254,19 +284,21 @@ function updateCategoryChanges(categorySelect, leftSelect, rightSelect) {
 		addOption(rightSelect, { value: item, text: units[item] });
 	});
 
-	rightSelect.value = options[1];
+	rightSelect.getElementsByTagName("option")[1].selected = "selected";
 	lastRightSelectedValue = rightSelect.value;
+
+	calculateValue(categorySelect, leftSelect, rightSelect);
 }
 
-function calculatevalue(categorySelect, leftSelect, rightSelect) {
+function calculateValue(categorySelect, leftSelect, rightSelect) {
+	const formulaText = document.getElementById("formula_text");
 	const leftInput = document.getElementById("left_inp");
 	const rightInput = document.getElementById("right_inp");
-	const formulaText = document.getElementById("formula_text");
 
 	const converterName = categorySelect.value;
 	const variants = converter[converterName].variants;
-	const variantkey = `${leftSelect.value}:${rightSelect.value}`;
-	const variant = variants[variantkey];
+	const variantKey = `${leftSelect.value}:${rightSelect.value}`;
+	const variant = variants[variantKey];
 	formulaText.innerText = variant.formula;
 	leftInput.value = 1;
 	rightInput.value = variant.calculation(1);
