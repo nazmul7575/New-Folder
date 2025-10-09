@@ -9,7 +9,6 @@
 body {
 	font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 	font-size: 16px;
-	background-color: #000;
 	width: 100vw;
 	height: 100vw;
 }
@@ -35,13 +34,14 @@ button {
 	text-transform: uppercase;
 	letter-spacing: 1px;
 	cursor: pointer;
+	z-index: 1;
 }
 
 button:hover {
 	background-color: #fff;
 	color: #000;
 	border: 1px solid #000;
-	transition: 0.5s ease-in-out;
+	transition: transform 0.5s ease-in-out;
 }
 
 h1 {
